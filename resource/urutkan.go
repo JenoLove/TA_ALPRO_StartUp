@@ -20,7 +20,7 @@ func SelectionSortByNamaAsc() {
 	}
 }
 
-func insertionSortByTahunDesc() {
+func InsertionSortByTahunDesc() {
 	for i := 1; i < storage.JumlahStartup; i++ {
 		key := storage.Startups[i]
 		j := i - 1
@@ -39,24 +39,35 @@ func UrutkanStartup() {
 	}
 
 	var kategori, metode, urutan int
+
 	fmt.Println("\n--- Pengurutan Data Startup ---")
+
 	fmt.Println("Kategori pengurutan:")
 	fmt.Println("1. Total Pendanaan")
 	fmt.Println("2. Tahun Berdiri")
 	fmt.Print("Pilih (1/2): ")
-	fmt.Scan(&kategori)
+	if _, err := fmt.Scanln(&kategori); err != nil || (kategori != 1 && kategori != 2) {
+		fmt.Println("Input tidak valid. Silakan masukkan angka 1 atau 2.")
+		return
+	}
 
 	fmt.Println("Metode pengurutan:")
 	fmt.Println("1. Selection Sort")
 	fmt.Println("2. Insertion Sort")
 	fmt.Print("Pilih (1/2): ")
-	fmt.Scan(&metode)
+	if _, err := fmt.Scanln(&metode); err != nil || (metode != 1 && metode != 2) {
+		fmt.Println("Input tidak valid. Silakan masukkan angka 1 atau 2.")
+		return
+	}
 
 	fmt.Println("Urutan:")
 	fmt.Println("1. Ascending")
 	fmt.Println("2. Descending")
 	fmt.Print("Pilih (1/2): ")
-	fmt.Scan(&urutan)
+	if _, err := fmt.Scanln(&urutan); err != nil || (urutan != 1 && urutan != 2) {
+		fmt.Println("Input tidak valid. Silakan masukkan angka 1 atau 2.")
+		return
+	}
 
 	switch metode {
 	case 1:
@@ -76,8 +87,7 @@ func UrutkanStartup() {
 		return
 	}
 
-	fmt.Println("\nData setelah diurutkan:")
-	TampilkanStartup()
+	TampilkanStartup(storage.Startups[:storage.JumlahStartup])
 }
 
 func SelectionSortPendanaan(asc bool) {

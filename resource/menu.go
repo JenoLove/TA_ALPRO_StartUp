@@ -1,24 +1,31 @@
 package resource
 
 import (
+	"bufio"
 	"fmt"
+	"os"
+	"strconv"
+	"strings"
 
 	"start-up/auth"
 )
 
-func TampilkanMenu() {
+func Menu() {
+	reader := bufio.NewReader(os.Stdin)
+
 	for {
-		fmt.Println("\n--- Aplikasi Manajemen Startup ---")
+		fmt.Println("\n--- APLIKASI MANAJEMEN START-UP ---\n")
 
 		menuNumber := 1
+		fmt.Printf("%d. Daftar Startup\n", menuNumber)
+		menuNumber++
+
 		if auth.CurrentUser != nil && auth.CurrentUser.Role == "admin" {
 			fmt.Printf("%d. Tambah Startup\n", menuNumber)
 			menuNumber++
 			fmt.Printf("%d. Ubah Startup\n", menuNumber)
 			menuNumber++
 			fmt.Printf("%d. Hapus Startup\n", menuNumber)
-			menuNumber++
-			fmt.Printf("%d. Tambah Anggota Tim\n", menuNumber)
 			menuNumber++
 		}
 
@@ -28,42 +35,107 @@ func TampilkanMenu() {
 		menuNumber++
 		fmt.Printf("%d. Laporan Startup per Bidang\n", menuNumber)
 		menuNumber++
+		fmt.Printf("%d. Daftar Anggota Tim\n", menuNumber)
+		menuNumber++
+
+		if auth.CurrentUser != nil && auth.CurrentUser.Role == "admin" {
+			fmt.Printf("%d. Tambah Anggota Tim\n", menuNumber)
+			menuNumber++
+		}
+
+		fmt.Printf("%d. Profil Saya\n", menuNumber)
+		menuNumber++
+
 		fmt.Printf("%d. Keluar\n", menuNumber)
 
 		fmt.Print("Pilih menu: ")
+		input, _ := reader.ReadString('\n')
+		input = strings.TrimSpace(input)
+		pilihan, err := strconv.Atoi(input)
 
-		var pilihan int
-		fmt.Scan(&pilihan)
-
-		menuNumber = 1
-		if auth.CurrentUser != nil && auth.CurrentUser.Role == "admin" {
-			switch pilihan {
-			case menuNumber:
-				TambahStartup()
-				continue
-			case menuNumber + 1:
-				UbahStartup()
-				continue
-			case menuNumber + 2:
-				HapusStartup()
-				continue
-			case menuNumber + 3:
-				TambahAnggotaTim()
-				continue
-			}
-			menuNumber += 4
+		if err != nil {
+			fmt.Println("Pilihan harus berupa angka")
+			continue
 		}
 
-		switch pilihan {
-		case menuNumber:
+		menuNumber = 1
+		var handled bool = false
+
+		if pilihan == menuNumber {
+			DaftarStartup()
+			handled = true
+		}
+
+		menuNumber++
+		if !handled && auth.CurrentUser != nil && auth.CurrentUser.Role == "admin" {
+			if pilihan == menuNumber {
+				TambahStartup()
+				handled = true
+			}
+			menuNumber++
+			if !handled && pilihan == menuNumber {
+				UbahStartup()
+				handled = true
+			}
+			menuNumber++
+			if !handled && pilihan == menuNumber {
+				HapusStartup()
+				handled = true
+			}
+			menuNumber++
+		}
+
+		if !handled && pilihan == menuNumber {
 			CariStartup()
-		case menuNumber + 1:
+			handled = true
+		}
+		menuNumber++
+
+		if !handled && pilihan == menuNumber {
 			UrutkanStartup()
-		case menuNumber + 2:
+			handled = true
+		}
+		menuNumber++
+
+		if !handled && pilihan == menuNumber {
 			LaporanBidang()
-		case menuNumber + 3:
+			handled = true
+		}
+		menuNumber++
+
+		if !handled && pilihan == menuNumber {
+			DaftarAnggotaTim()
+			handled = true
+		}
+		menuNumber++
+
+		if !handled && auth.CurrentUser != nil && auth.CurrentUser.Role == "admin" {
+			if pilihan == menuNumber {
+				TambahAnggotaTim()
+				handled = true
+			}
+			menuNumber++
+		}
+
+		if !handled && pilihan == menuNumber {
+			switch auth.CurrentUser.Role {
+			case "admin":
+				ProfilAdmin()
+			case "karyawan":
+				TampilkanProfilKaryawan()
+			default:
+				fmt.Println("Peran tidak dikenali.")
+			}
+			handled = true
+		}
+		menuNumber++
+
+		if !handled && pilihan == menuNumber {
+			fmt.Println("Terima kasih telah menggunakan aplikasi ini.")
 			return
-		default:
+		}
+
+		if !handled {
 			fmt.Println("Pilihan tidak valid.")
 		}
 	}

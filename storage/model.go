@@ -24,6 +24,7 @@ type User struct {
 	Jabatan    string
 	Departemen string
 	Role       string
+	IsActive   *bool
 }
 
 func InitAdmin() {
@@ -33,11 +34,17 @@ func InitAdmin() {
 		}
 	}
 
-	Users[UserCount] = User{
+	trueVal := true
+	admin := User{
 		Nama:     "Admin",
 		Email:    "admin@gmail.com",
 		Password: "admin123",
 		Role:     "admin",
+		IsActive: &trueVal,
 	}
-	UserCount++
+
+	if UserCount < len(Users) {
+		Users[UserCount] = admin
+		UserCount++
+	}
 }

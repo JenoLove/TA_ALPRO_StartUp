@@ -30,12 +30,20 @@ func main() {
 		case "1":
 			auth.Register()
 		case "2":
-			auth.Login()
+			fmt.Print("Masukkan email: ")
+			email, _ := reader.ReadString('\n')
+			email = strings.TrimSpace(email)
+
+			fmt.Print("Masukkan password: ")
+			password, _ := reader.ReadString('\n')
+			password = strings.TrimSpace(password)
+
+			auth.CurrentUser = auth.Login(email, password)
 			if auth.CurrentUser != nil {
-				resource.TampilkanMenu()
+				resource.Menu()
 			}
 		case "3":
-			auth.ForgotPassword()
+			auth.LupaPassword()
 		case "4":
 			fmt.Println("Keluar dari aplikasi.")
 			return
