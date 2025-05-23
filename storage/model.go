@@ -27,14 +27,12 @@ type User struct {
 }
 
 func InitAdmin() {
-	// Cek apakah admin sudah ada
 	for i := 0; i < UserCount; i++ {
 		if Users[i].Email == "admin@gmail.com" {
-			return // Sudah ada, tidak usah ditambah
+			return
 		}
 	}
 
-	// Tambah akun admin
 	Users[UserCount] = User{
 		Nama:     "Admin",
 		Email:    "admin@gmail.com",

@@ -21,9 +21,8 @@ func TambahStartup() {
 	var s storage.Startup
 	s.ID = storage.JumlahStartup + 1
 
-	// Tambahkan ini untuk buang newline sisa jika dipanggil setelah fmt.Scan()
 	fmt.Print("")
-	reader.ReadString('\n') // <-- ini penting banget!
+	reader.ReadString('\n')
 
 	fmt.Print("Nama Startup: ")
 	nama, _ := reader.ReadString('\n')
@@ -66,7 +65,6 @@ func UbahStartup() {
 
 	reader := bufio.NewReader(os.Stdin)
 
-	// Tampilkan daftar startup terlebih dahulu
 	fmt.Println("\nDaftar Startup:")
 	for i := 0; i < storage.JumlahStartup; i++ {
 		fmt.Printf("%d. %s (Bidang: %s)\n", storage.Startups[i].ID, storage.Startups[i].Nama, storage.Startups[i].BidangUsaha)
@@ -75,9 +73,7 @@ func UbahStartup() {
 	fmt.Print("\nMasukkan ID Startup yang akan diubah: ")
 	var id int
 	fmt.Scan(&id)
-	reader.ReadString('\n') // Membersihkan buffer
-
-	// Cari startup berdasarkan ID
+	reader.ReadString('\n')
 	var found *storage.Startup
 	for i := 0; i < storage.JumlahStartup; i++ {
 		if storage.Startups[i].ID == id {
@@ -146,7 +142,6 @@ func HapusStartup() {
 		return
 	}
 
-	// Tampilkan daftar startup terlebih dahulu
 	fmt.Println("\nDaftar Startup:")
 	for i := 0; i < storage.JumlahStartup; i++ {
 		fmt.Printf("%d. %s\n", storage.Startups[i].ID, storage.Startups[i].Nama)
@@ -156,7 +151,6 @@ func HapusStartup() {
 	var id int
 	fmt.Scan(&id)
 
-	// Cari index startup berdasarkan ID
 	index := -1
 	for i := 0; i < storage.JumlahStartup; i++ {
 		if storage.Startups[i].ID == id {
@@ -170,19 +164,16 @@ func HapusStartup() {
 		return
 	}
 
-	// Konfirmasi penghapusan
 	fmt.Printf("Anda yakin ingin menghapus startup %s (ID: %d)? (y/n): ", storage.Startups[index].Nama, id)
 	var confirm string
 	fmt.Scan(&confirm)
 
 	if strings.ToLower(confirm) == "y" {
-		// Geser elemen array ke kiri mulai dari index yang dihapus
 		for i := index; i < storage.JumlahStartup-1; i++ {
 			storage.Startups[i] = storage.Startups[i+1]
-			storage.Startups[i].ID = i + 1 // Update ID
+			storage.Startups[i].ID = i + 1
 		}
 
-		// Kurangi jumlah startup
 		storage.JumlahStartup--
 		fmt.Println("Startup berhasil dihapus.")
 	} else {

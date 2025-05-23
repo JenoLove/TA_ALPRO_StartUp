@@ -77,7 +77,7 @@ func UrutkanStartup() {
 	}
 
 	fmt.Println("\nData setelah diurutkan:")
-	TampilkanStartup() // Pastikan fungsi ini sudah dibuat di file lain
+	TampilkanStartup()
 }
 
 func SelectionSortPendanaan(asc bool) {

@@ -22,7 +22,7 @@ func CariStartup() {
 		for i := 0; i < storage.JumlahStartup; i++ {
 			if storage.Startups[i].Nama == nama {
 				indeks = i
-				i = storage.JumlahStartup // untuk keluar
+				i = storage.JumlahStartup
 			}
 		}
 	} else if pilihan == 2 {

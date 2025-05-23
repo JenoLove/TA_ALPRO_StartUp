@@ -10,7 +10,6 @@ func TampilkanMenu() {
 	for {
 		fmt.Println("\n--- Aplikasi Manajemen Startup ---")
 
-		// Menu untuk Admin
 		menuNumber := 1
 		if auth.CurrentUser != nil && auth.CurrentUser.Role == "admin" {
 			fmt.Printf("%d. Tambah Startup\n", menuNumber)
@@ -23,7 +22,6 @@ func TampilkanMenu() {
 			menuNumber++
 		}
 
-		// Menu untuk semua user
 		fmt.Printf("%d. Cari Startup\n", menuNumber)
 		menuNumber++
 		fmt.Printf("%d. Urutkan Startup\n", menuNumber)
@@ -37,7 +35,6 @@ func TampilkanMenu() {
 		var pilihan int
 		fmt.Scan(&pilihan)
 
-		// Reset menuNumber untuk pengecekan
 		menuNumber = 1
 		if auth.CurrentUser != nil && auth.CurrentUser.Role == "admin" {
 			switch pilihan {
