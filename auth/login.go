@@ -15,7 +15,13 @@ func Login(email string, password string) *storage.User {
 		storedPass := strings.TrimSpace(storage.Users[i].Password)
 
 		if storedEmail == email && storedPass == password {
-			return &storage.Users[i]
+			if storage.Users[i].IsActive == nil || !(*storage.Users[i].IsActive) {
+				fmt.Println("User dinonaktifkan.")
+				return nil
+			}
+
+			CurrentUser = &storage.Users[i]
+			return CurrentUser
 		}
 	}
 

@@ -45,7 +45,7 @@ func main() {
 		case "3":
 			auth.LupaPassword()
 		case "4":
-			fmt.Println("Anda telah K=keluar dari aplikasi.")
+			fmt.Println("Anda telah Keluar dari aplikasi.")
 			return
 		default:
 			fmt.Println("Pilihan tidak valid, coba lagi.")

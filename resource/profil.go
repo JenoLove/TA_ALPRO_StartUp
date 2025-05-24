@@ -19,8 +19,7 @@ func ProfilAdmin() {
 		namaWidth := 20
 		emailWidth := 25
 		roleWidth := 10
-		statusWidth := 10
-		totalWidth := noWidth + namaWidth + emailWidth + roleWidth + statusWidth + 6*3 + 1
+		totalWidth := noWidth + namaWidth + emailWidth + roleWidth + 6*3 + 1
 
 		judul := "=== Manajemen User ==="
 		spasiKiri := (totalWidth - len(judul)) / 2
@@ -32,26 +31,22 @@ func ProfilAdmin() {
 		}
 
 		fmt.Println("+" + strings.Repeat("-", totalWidth-2) + "+")
-		fmt.Printf("| %-*s | %-*s | %-*s | %-*s | %-*s |\n",
+		fmt.Printf("| %-*s | %-*s | %-*s | %-*s |\n",
 			noWidth, "No",
 			namaWidth, "Nama",
 			emailWidth, "Email",
-			roleWidth, "Role",
-			statusWidth, "Aktif")
+			roleWidth, "Role")
 		fmt.Println("+" + strings.Repeat("-", totalWidth-2) + "+")
 
 		for i := 0; i < storage.UserCount; i++ {
 			user := storage.Users[i]
-			aktif := false
 			if user.IsActive != nil {
-				aktif = *user.IsActive
 			}
-			fmt.Printf("| %-*d | %-*s | %-*s | %-*s | %-*v |\n",
+			fmt.Printf("| %-*d | %-*s | %-*s | %-*s |\n",
 				noWidth, i+1,
 				namaWidth, user.Nama,
 				emailWidth, user.Email,
-				roleWidth, user.Role,
-				statusWidth, aktif)
+				roleWidth, user.Role)
 		}
 		fmt.Println("+" + strings.Repeat("-", totalWidth-2) + "+")
 
