@@ -10,15 +10,15 @@ import (
 	"start-up/storage"
 )
 
-func InputString(prompt string) string {
+func MasukanString(prompt string) string {
 	reader := bufio.NewReader(os.Stdin)
 	fmt.Print(prompt)
 	input, _ := reader.ReadString('\n')
 	return strings.TrimSpace(input)
 }
 
-func InputInt(prompt string) (int, bool) {
-	input := InputString(prompt)
+func MasukanInt(prompt string) (int, bool) {
+	input := MasukanString(prompt)
 	value, err := strconv.Atoi(input)
 	if err != nil {
 		fmt.Println("Input tidak valid.")
@@ -27,7 +27,7 @@ func InputInt(prompt string) (int, bool) {
 	return value, true
 }
 
-func TampilkanTabelStartup(s storage.Startup) {
+func DaftarTabelStartup(s storage.Startup) {
 	fmt.Println(strings.Repeat("-", 85))
 	fmt.Printf("| %-4s | %-25s | %-20s | %-15s | %-12s |\n", "ID", "Nama Startup", "Bidang Usaha", "Tahun Berdiri", "Total Dana")
 	fmt.Println(strings.Repeat("-", 85))
@@ -45,7 +45,7 @@ func TambahStartup() {
 	s.ID = storage.JumlahStartup + 1
 
 	for {
-		s.Nama = InputString("Nama Startup: ")
+		s.Nama = MasukanString("Nama Startup: ")
 		if s.Nama != "" {
 			break
 		}
@@ -53,7 +53,7 @@ func TambahStartup() {
 	}
 
 	for {
-		s.BidangUsaha = InputString("Bidang Usaha: ")
+		s.BidangUsaha = MasukanString("Bidang Usaha: ")
 		if s.BidangUsaha != "" {
 			break
 		}
@@ -61,7 +61,7 @@ func TambahStartup() {
 	}
 
 	for {
-		tahun, ok := InputInt("Tahun Berdiri: ")
+		tahun, ok := MasukanInt("Tahun Berdiri: ")
 		if ok {
 			s.TahunBerdiri = tahun
 			break
@@ -70,7 +70,7 @@ func TambahStartup() {
 	}
 
 	for {
-		dana, ok := InputInt("Total Dana: ")
+		dana, ok := MasukanInt("Total Dana: ")
 		if ok {
 			s.TotalDana = dana
 			break
@@ -89,8 +89,6 @@ func DaftarStartup() {
 		return
 	}
 
-	fmt.Println("\n--- Daftar Startup ---")
-
 	idWidth := 4
 	namaWidth := 20
 	bidangWidth := 20
@@ -98,6 +96,10 @@ func DaftarStartup() {
 	danaWidth := 12
 
 	totalTableWidth := idWidth + namaWidth + bidangWidth + tahunWidth + danaWidth + 6*3 + 1
+
+	judul := "=== DAFTAR START UP ===\n"
+	padding := (totalTableWidth - len(judul)) / 2
+	fmt.Println("\n" + strings.Repeat(" ", padding) + judul)
 
 	fmt.Println("+" + strings.Repeat("-", totalTableWidth-2) + "+")
 
@@ -131,7 +133,7 @@ func UbahStartup() {
 
 	DaftarStartup()
 
-	id, ok := InputInt("\nMasukkan ID Startup yang akan diubah: ")
+	id, ok := MasukanInt("\nMasukkan ID Startup yang akan diubah: ")
 	if !ok {
 		return
 	}
@@ -149,11 +151,10 @@ func UbahStartup() {
 		return
 	}
 
-	fmt.Println("\n--- Data Saat Ini ---")
-	TampilkanTabelStartup(*found)
+	DaftarStartup()
 
 	for {
-		nama := InputString("Nama Startup: ")
+		nama := MasukanString("Nama Startup: ")
 		if nama != "" {
 			found.Nama = nama
 			break
@@ -162,7 +163,7 @@ func UbahStartup() {
 	}
 
 	for {
-		bidang := InputString("Bidang Usaha: ")
+		bidang := MasukanString("Bidang Usaha: ")
 		if bidang != "" {
 			found.BidangUsaha = bidang
 			break
@@ -171,7 +172,7 @@ func UbahStartup() {
 	}
 
 	for {
-		tahun, ok := InputInt("Tahun Berdiri: ")
+		tahun, ok := MasukanInt("Tahun Berdiri: ")
 		if ok {
 			found.TahunBerdiri = tahun
 			break
@@ -180,7 +181,7 @@ func UbahStartup() {
 	}
 
 	for {
-		dana, ok := InputInt("Total Dana: ")
+		dana, ok := MasukanInt("Total Dana: ")
 		if ok {
 			found.TotalDana = dana
 			break
@@ -199,7 +200,7 @@ func HapusStartup() {
 
 	DaftarStartup()
 
-	id, ok := InputInt("\nMasukkan ID Startup yang akan dihapus: ")
+	id, ok := MasukanInt("\nMasukkan ID Startup yang akan dihapus: ")
 	if !ok {
 		return
 	}
@@ -217,7 +218,7 @@ func HapusStartup() {
 		return
 	}
 
-	confirm := InputString(fmt.Sprintf("Anda yakin ingin menghapus startup %s (ID: %d)? (y/n): ", storage.Startups[index].Nama, id))
+	confirm := MasukanString(fmt.Sprintf("Anda yakin ingin menghapus startup %s (ID: %d)? (y/n): ", storage.Startups[index].Nama, id))
 	if strings.ToLower(confirm) == "y" {
 		for j := index; j < storage.JumlahStartup-1; j++ {
 			storage.Startups[j] = storage.Startups[j+1]

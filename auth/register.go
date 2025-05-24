@@ -12,7 +12,7 @@ import (
 
 func Register() {
 	if storage.UserCount >= 100 {
-		fmt.Println("Maksimum pengguna tercapai.")
+		fmt.Println("Pengguna sudah maksimum.")
 		return
 	}
 
@@ -23,8 +23,8 @@ func Register() {
 
 	for {
 		fmt.Print("Nama Lengkap: ")
-		nama, _ = reader.ReadString('\n')
-		nama = strings.TrimSpace(nama)
+		namaInput, _ := reader.ReadString('\n')
+		nama = strings.TrimSpace(namaInput)
 
 		if nama == "" {
 			fmt.Println("Tidak boleh kosong.")
@@ -40,13 +40,13 @@ func Register() {
 		if valid {
 			break
 		}
-		fmt.Println("Nama hanya boleh berisi huruf.")
+		fmt.Println("Nama hanya boleh berisi huruf dan spasi.")
 	}
 
 	for {
 		fmt.Print("Tempat, tanggal lahir: ")
-		ttl, _ = reader.ReadString('\n')
-		ttl = strings.TrimSpace(ttl)
+		ttlInput, _ := reader.ReadString('\n')
+		ttl = strings.TrimSpace(ttlInput)
 		if ttl != "" {
 			break
 		}
@@ -55,8 +55,8 @@ func Register() {
 
 	for {
 		fmt.Print("No HP: ")
-		nohp, _ = reader.ReadString('\n')
-		nohp = strings.TrimSpace(nohp)
+		nohpInput, _ := reader.ReadString('\n')
+		nohp = strings.TrimSpace(nohpInput)
 
 		if nohp == "" {
 			fmt.Println("Tidak boleh kosong.")
@@ -77,8 +77,8 @@ func Register() {
 
 	for {
 		fmt.Print("Email: ")
-		email, _ = reader.ReadString('\n')
-		email = strings.TrimSpace(email)
+		emailInput, _ := reader.ReadString('\n')
+		email = strings.TrimSpace(emailInput)
 		if email != "" {
 			break
 		}
@@ -87,12 +87,14 @@ func Register() {
 
 	for {
 		fmt.Print("Password: ")
-		pass, _ = reader.ReadString('\n')
-		pass = strings.TrimSpace(pass)
-		if len(pass) >= 8 {
+		passInput, _ := reader.ReadString('\n')
+		pass = strings.TrimSpace(passInput)
+
+		if ValidasiPassword(pass) {
 			break
+		} else {
+			fmt.Println("Password harus minimal 8 karakter dan mengandung huruf serta angka")
 		}
-		fmt.Println("Password minimal 8 karakter.")
 	}
 
 	storage.Users[storage.UserCount] = storage.User{

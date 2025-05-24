@@ -14,10 +14,10 @@ func Menu() {
 	reader := bufio.NewReader(os.Stdin)
 
 	for {
-		fmt.Println("\n--- APLIKASI MANAJEMEN START-UP ---\n")
+		fmt.Println("\n=== APLIKASI MANAJEMEN START-UP ===\n")
 
 		menuNumber := 1
-		fmt.Printf("%d. Daftar Startup\n", menuNumber)
+		fmt.Printf("%d. Daftar StartUp\n", menuNumber)
 		menuNumber++
 
 		if auth.CurrentUser != nil && auth.CurrentUser.Role == "admin" {

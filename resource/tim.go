@@ -35,7 +35,7 @@ func TambahAnggotaTim() {
 
 			storage.Startups[i].Tim[storage.Startups[i].JumlahAnggota] = t
 			storage.Startups[i].JumlahAnggota++
-			fmt.Println("Anggota ditambahkan.")
+			fmt.Println("Anggota berhasil ditambahkan.")
 			return
 		}
 	}
@@ -51,18 +51,20 @@ func DaftarAnggotaTim() {
 
 	for i := 0; i < storage.JumlahStartup; i++ {
 		s := storage.Startups[i]
-		fmt.Printf("\n--- Startup: %s ---\n", s.Nama)
+
+		noWidth := 4
+		namaAnggotaWidth := 25
+		peranWidth := 20
+		totalWidth := noWidth + namaAnggotaWidth + peranWidth + 3*3 + 1
+
+		judul := fmt.Sprintf("=== Startup: %s ===\n", s.Nama)
+		padding := (totalWidth - len(judul)) / 2
+		fmt.Printf("\n%s%s\n", strings.Repeat(" ", padding), judul)
 
 		if s.JumlahAnggota == 0 {
 			fmt.Println("Belum ada anggota tim.")
 			continue
 		}
-
-		noWidth := 4
-		namaAnggotaWidth := 25
-		peranWidth := 20
-
-		totalWidth := noWidth + namaAnggotaWidth + peranWidth + 3*3 + 1
 
 		fmt.Println("+" + strings.Repeat("-", totalWidth-2) + "+")
 		fmt.Printf("| %-*s | %-*s | %-*s |\n",

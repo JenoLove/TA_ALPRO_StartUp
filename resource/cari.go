@@ -16,7 +16,7 @@ func CariStartup() {
 	fmt.Println("1. Cari berdasarkan Nama")
 	fmt.Println("2. Cari berdasarkan Bidang Usaha")
 	fmt.Println("3. Kembali")
-	fmt.Println("Pilih jenis pencarian: \n")
+	fmt.Print("Pilih jenis pencarian:")
 
 	jenisInput, _ := reader.ReadString('\n')
 	jenisInput = strings.TrimSpace(jenisInput)
@@ -88,7 +88,7 @@ func CetakStartupTable(startups [100]storage.Startup, count int) {
 		danaWidth   = 12
 	)
 
-	printBorder := func() {
+	cetakBorder := func() {
 		fmt.Println("+" + strings.Repeat("-", idWidth+2) +
 			"+" + strings.Repeat("-", namaWidth+2) +
 			"+" + strings.Repeat("-", bidangWidth+2) +
@@ -96,14 +96,14 @@ func CetakStartupTable(startups [100]storage.Startup, count int) {
 			"+" + strings.Repeat("-", danaWidth+2) + "+")
 	}
 
-	printBorder()
+	cetakBorder()
 	fmt.Printf("| %-*s | %-*s | %-*s | %-*s | %-*s |\n",
 		idWidth, "ID",
 		namaWidth, "Nama Startup",
 		bidangWidth, "Bidang Usaha",
 		tahunWidth, "Tahun Berdiri",
 		danaWidth, "Total Dana")
-	printBorder()
+	cetakBorder()
 
 	for i := 0; i < count; i++ {
 		startup := startups[i]
@@ -116,7 +116,7 @@ func CetakStartupTable(startups [100]storage.Startup, count int) {
 			danaWidth, format(startup.TotalDana))
 	}
 
-	printBorder()
+	cetakBorder()
 }
 
 func truncateString(str string, maxLength int) string {

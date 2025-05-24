@@ -22,9 +22,9 @@ func ProfilAdmin() {
 		statusWidth := 10
 		totalWidth := noWidth + namaWidth + emailWidth + roleWidth + statusWidth + 6*3 + 1
 
-		title := "=== Manajemen User ==="
-		spasiKiri := (totalWidth - len(title)) / 2
-		fmt.Printf("\n%s%s\n\n", strings.Repeat(" ", spasiKiri), title)
+		judul := "=== Manajemen User ==="
+		spasiKiri := (totalWidth - len(judul)) / 2
+		fmt.Printf("\n%s%s\n\n", strings.Repeat(" ", spasiKiri), judul)
 
 		if storage.UserCount == 0 {
 			fmt.Println("Tidak ada user yang terdaftar.")
@@ -103,9 +103,9 @@ func TampilkanProfilKaryawan() {
 	emailWidth := 30
 	totalWidth := noWidth + namaWidth + ttlWidth + noHPWidth + emailWidth + 6*3 + 1
 
-	title := "=== Profil Saya ==="
-	spasiKiri := (totalWidth - len(title)) / 2
-	fmt.Printf("\n%s%s\n\n", strings.Repeat(" ", spasiKiri), title)
+	judul := "=== Profil Saya ==="
+	spasiKiri := (totalWidth - len(judul)) / 2
+	fmt.Printf("\n%s%s\n\n", strings.Repeat(" ", spasiKiri), judul)
 
 	fmt.Println("+" + strings.Repeat("-", totalWidth-2) + "+")
 	fmt.Printf("| %-*s | %-*s | %-*s | %-*s | %-*s |\n",

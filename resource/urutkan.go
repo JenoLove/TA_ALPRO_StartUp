@@ -6,7 +6,7 @@ import (
 	"start-up/storage"
 )
 
-func SelectionSortByNamaAsc() {
+func CariSortByNamaAsc() {
 	for i := 0; i < storage.JumlahStartup-1; i++ {
 		min := i
 		for j := i + 1; j < storage.JumlahStartup; j++ {
@@ -20,7 +20,7 @@ func SelectionSortByNamaAsc() {
 	}
 }
 
-func InsertionSortByTahunDesc() {
+func CariSortByTahunDesc() {
 	for i := 1; i < storage.JumlahStartup; i++ {
 		key := storage.Startups[i]
 		j := i - 1
@@ -40,7 +40,7 @@ func UrutkanStartup() {
 
 	var kategori, metode, urutan int
 
-	fmt.Println("\n--- Pengurutan Data Startup ---")
+	fmt.Println("\n=== URUTKAN DATA STARTUP ===\n")
 
 	fmt.Println("Kategori pengurutan:")
 	fmt.Println("1. Total Pendanaan")
@@ -51,7 +51,7 @@ func UrutkanStartup() {
 		return
 	}
 
-	fmt.Println("Metode pengurutan:")
+	fmt.Println("\n Metode pengurutan:")
 	fmt.Println("1. Selection Sort")
 	fmt.Println("2. Insertion Sort")
 	fmt.Print("Pilih (1/2): ")
@@ -60,7 +60,7 @@ func UrutkanStartup() {
 		return
 	}
 
-	fmt.Println("Urutan:")
+	fmt.Println("\n Urutan:")
 	fmt.Println("1. Ascending")
 	fmt.Println("2. Descending")
 	fmt.Print("Pilih (1/2): ")
@@ -72,25 +72,25 @@ func UrutkanStartup() {
 	switch metode {
 	case 1:
 		if kategori == 1 {
-			SelectionSortPendanaan(urutan == 1)
+			Pendanaan(urutan == 1)
 		} else {
-			SelectionSortTahun(urutan == 1)
+			CariSortTahun(urutan == 1)
 		}
 	case 2:
 		if kategori == 1 {
-			InsertionSortPendanaan(urutan == 1)
+			Pendanaan(urutan == 1)
 		} else {
-			InsertionSortTahun(urutan == 1)
+			CariSortTahun(urutan == 1)
 		}
 	default:
 		fmt.Println("Pilihan tidak valid.")
 		return
 	}
 
-	TampilkanStartup(storage.Startups[:storage.JumlahStartup])
+	TampilStartup(storage.Startups, storage.JumlahStartup)
 }
 
-func SelectionSortPendanaan(asc bool) {
+func CariPendanaan(asc bool) {
 	for i := 0; i < storage.JumlahStartup-1; i++ {
 		idx := i
 		for j := i + 1; j < storage.JumlahStartup; j++ {
@@ -105,7 +105,7 @@ func SelectionSortPendanaan(asc bool) {
 	}
 }
 
-func SelectionSortTahun(asc bool) {
+func CariSortTahun(asc bool) {
 	for i := 0; i < storage.JumlahStartup-1; i++ {
 		idx := i
 		for j := i + 1; j < storage.JumlahStartup; j++ {
@@ -120,7 +120,7 @@ func SelectionSortTahun(asc bool) {
 	}
 }
 
-func InsertionSortPendanaan(asc bool) {
+func Pendanaan(asc bool) {
 	for i := 1; i < storage.JumlahStartup; i++ {
 		key := storage.Startups[i]
 		j := i - 1
@@ -132,7 +132,7 @@ func InsertionSortPendanaan(asc bool) {
 	}
 }
 
-func InsertionSortTahun(asc bool) {
+func Tahun(asc bool) {
 	for i := 1; i < storage.JumlahStartup; i++ {
 		key := storage.Startups[i]
 		j := i - 1

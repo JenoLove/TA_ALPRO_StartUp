@@ -32,12 +32,13 @@ func LupaPassword() {
 				if ValidasiPassword(passBaru) {
 					break
 				} else {
-					fmt.Println("Password harus 8 karakter")
+					fmt.Println("Password harus minimal 8 karakter dan mengandung huruf serta angka")
 				}
 			}
 
 			storage.Users[i].Password = passBaru
 			fmt.Println("Password berhasil diubah.")
+			break // keluar dari loop pencarian user
 		}
 	}
 

@@ -35,11 +35,11 @@ func CetakLaporanBidang(bidang [100]string, jumlah [100]int, total int) {
 
 	totalTableWidth := noWidth + bidangWidth + jumlahWidth + 3*3 + 1
 
-	title := "--- Laporan Startup per Bidang ---"
-	spasiKiri := (totalTableWidth - len(title)) / 2
+	judul := "=== LAPORAN PER BIDANG ===\n"
+	spasiKiri := (totalTableWidth - len(judul)) / 2
 
 	fmt.Println()
-	fmt.Printf("%s%s\n", strings.Repeat(" ", spasiKiri), title)
+	fmt.Printf("%s%s\n", strings.Repeat(" ", spasiKiri), judul)
 	fmt.Println("+" + strings.Repeat("-", totalTableWidth-2) + "+")
 	fmt.Printf("| %-*s | %-*s | %-*s |\n",
 		noWidth, "No",

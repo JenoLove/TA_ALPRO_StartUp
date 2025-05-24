@@ -16,7 +16,7 @@ func main() {
 
 	reader := bufio.NewReader(os.Stdin)
 	for {
-		fmt.Println("=== APLIKASI MANAJEMEN STARTUP ===")
+		fmt.Println("\n === APLIKASI MANAJEMEN STARTUP ===\n")
 		fmt.Println("1. Registrasi")
 		fmt.Println("2. Login")
 		fmt.Println("3. Lupa Password")
@@ -30,11 +30,11 @@ func main() {
 		case "1":
 			auth.Register()
 		case "2":
-			fmt.Print("Masukkan email: ")
+			fmt.Print("email: ")
 			email, _ := reader.ReadString('\n')
 			email = strings.TrimSpace(email)
 
-			fmt.Print("Masukkan password: ")
+			fmt.Print("password: ")
 			password, _ := reader.ReadString('\n')
 			password = strings.TrimSpace(password)
 
@@ -45,7 +45,7 @@ func main() {
 		case "3":
 			auth.LupaPassword()
 		case "4":
-			fmt.Println("Keluar dari aplikasi.")
+			fmt.Println("Anda telah K=keluar dari aplikasi.")
 			return
 		default:
 			fmt.Println("Pilihan tidak valid, coba lagi.")
