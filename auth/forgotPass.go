@@ -38,7 +38,7 @@ func LupaPassword() {
 
 			storage.Users[i].Password = passBaru
 			fmt.Println("Password berhasil diubah.")
-			break // keluar dari loop pencarian user
+			break
 		}
 	}
 
